@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <title>LP戦略提案ツール</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Helvetica Neue', sans-serif;
+    }
+
+    #loadingSpinner {
+      display: none;
+    }
+
+    .container {
+      max-width: 800px;
+    }
+
+    h1,
+    h2 {
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container py-5">
+    <h1 class="mb-4">One Shot LP</h1>
+
+    <form id="strategyForm">
+      <!-- プロジェクト概要 -->
+      <div class="card mb-4">
+        <div class="card-header bg-light">
+          <strong>プロジェクト概要</strong>
+        </div>
+        <div class="card-body">
+          <div class="mb-3">
+            <label class="form-label">LPの目的</label><br>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" name="purpose" value="資料請求"> 資料請求
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" name="purpose" value="問い合わせ"> 問い合わせ
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" name="purpose" value="予約"> 予約
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" name="purpose" value="購入"> 購入
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">ターゲット</label><br>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="target_type" value="toC" checked> BtoC
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="target_type" value="toB"> BtoB
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">地域</label>
+            <input class="form-control" type="text" name="region" placeholder="例：東京都渋谷区">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">依頼に至った背景・理由</label>
+            <textarea class="form-control" name="background" placeholder="LPを制作する理由をご記入ください"></textarea>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">過去に行っていた集客方法</label>
+            <textarea class="form-control" name="previous_method" placeholder="例：チラシ、SNS広告、SEO施策など"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- ペルソナ -->
+      <div class="card mb-4">
+        <div class="card-header bg-light">
+          <strong>ペルソナ</strong>
+        </div>
+        <div class="card-body">
+          <div class="mb-3">
+            <label class="form-label">年齢</label>
+            <select class="form-select" name="age">
+              <option value="10代">10代</option>
+              <option value="20代">20代</option>
+              <option value="30代">30代</option>
+              <option value="40代">40代</option>
+              <option value="50代">50代</option>
+              <option value="60代以上">60代以上</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">性別</label><br>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="gender" value="男性"> 男性
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="gender" value="女性"> 女性
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">職業・役職</label>
+            <input class="form-control" type="text" name="job" placeholder="例：営業職／部長など">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">抱えている課題や不満</label>
+            <textarea class="form-control" name="pain_point" placeholder="例：集客できない、売上が上がらないなど"></textarea>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">情報収集の手段</label>
+            <input class="form-control" type="text" name="info_source" placeholder="例：Google検索、SNS、比較サイトなど">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">意思決定の決め手</label>
+            <textarea class="form-control" name="decision_reason" placeholder="例：価格、信頼性、実績など"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- サービス・強み分析 -->
+      <div class="card mb-4">
+        <div class="card-header bg-light">
+          <strong>サービス・強み分析</strong>
+        </div>
+        <div class="card-body">
+          <div class="mb-3">
+            <label class="form-label">サービス内容</label>
+            <input class="form-control" type="text" name="product" placeholder="例：美容整体、企業向け研修など">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">提供対象</label>
+            <input class="form-control" type="text" name="target" placeholder="例：個人、中小企業、医療機関など">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">業種・分野</label>
+            <input class="form-control" type="text" name="industry" placeholder="例：教育、医療、ITなど">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">自社の強み</label>
+            <textarea class="form-control" name="strength" placeholder="自信のある点、こだわりなど"></textarea>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">自社が“選ばれてきた”理由</label>
+            <textarea class="form-control" name="reason_chosen" placeholder="顧客から評価されている点など"></textarea>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">同業他社との違いは何だと思うか？</label>
+            <textarea class="form-control" name="difference" placeholder="差別化ポイントをご記入ください"></textarea>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">弱み・課題と感じている点</label>
+            <textarea class="form-control" name="weakness" placeholder="正直にご記入いただいてOKです"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- 競合分析 -->
+      <div class="card mb-4">
+        <div class="card-header bg-light">
+          <strong>競合分析</strong>
+        </div>
+        <div class="card-body">
+          <div class="mb-3">
+            <label class="form-label">競合サイトURL（最大5件）</label>
+            <input class="form-control mb-2" type="url" name="competitor" placeholder="https://example1.com">
+            <input class="form-control mb-2" type="url" name="competitor" placeholder="https://example2.com">
+            <input class="form-control mb-2" type="url" name="competitor" placeholder="https://example3.com">
+            <input class="form-control mb-2" type="url" name="competitor" placeholder="https://example4.com">
+            <input class="form-control" type="url" name="competitor" placeholder="https://example5.com">
+          </div>
+        </div>
+      </div>
+
+      <button class="btn btn-primary btn-lg w-100" type="submit">Shake It！</button>
+    </form>
+
+    <div id="loadingSpinner" class="text-center my-4">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <div class="mt-2">LP構成案を生成中です...</div>
+    </div>
+
+    <div id="resultArea" class="mt-5" style="display: none;">
+      <h2 class="mb-4">戦略提案の結果</h2>
+
+      <div class="card mb-4">
+        <div class="card-header bg-info text-white">競合との比較分析</div>
+        <div class="card-body" id="comparisonHTML"></div>
+      </div>
+
+      <div class="card mb-4">
+        <div class="card-header bg-primary text-white">効果的な訴求ポイント</div>
+        <div class="card-body" id="appealPointHTML"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-header bg-secondary text-white">LP構成案</div>
+        <div class="card-body" id="lpStructureHTML"></div>
+      </div>
+    </div>
+  </div>
+  <script>
+    document.getElementById("strategyForm").addEventListener("submit", async function (e) {
+      e.preventDefault();
+
+      document.getElementById("loadingSpinner").style.display = "block";
+      document.getElementById("resultArea").style.display = "none";
+
+      const formData = new FormData(e.target);
+      const data = {};
+      for (const [key, value] of formData.entries()) {
+        if (key in data) {
+          if (!Array.isArray(data[key])) data[key] = [data[key]];
+          data[key].push(value);
+        } else {
+          data[key] = value;
+        }
+      }
+
+      // 複数あるcompetitorを配列でまとめる
+      const competitorInputs = document.querySelectorAll("input[name='competitor']");
+      data["competitor"] = Array.from(competitorInputs)
+        .map(input => input.value)
+        .filter(url => url.trim() !== "");
+
+      const checkboxes = document.querySelectorAll("input[name='purpose']:checked");
+      data["purpose"] = Array.from(checkboxes).map(cb => cb.value);
+
+      const res = await fetch("/generate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      });
+
+      const result = await res.json();
+
+      document.getElementById("comparisonHTML").innerHTML = result.comparison;
+      document.getElementById("appealPointHTML").innerHTML = result.appeal_point;
+      document.getElementById("lpStructureHTML").innerHTML = result.lp_structure;
+
+      document.getElementById("loadingSpinner").style.display = "none";
+      document.getElementById("resultArea").style.display = "block";
+
+      document.getElementById("resultArea").scrollIntoView({ behavior: "smooth" });
+    });
+  </script>
+
+</body>
+
+</html>
